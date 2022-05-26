@@ -1,3 +1,0 @@
-number of memory blocks = 5
-max memory block size = 40000
-number of jobs = 40
