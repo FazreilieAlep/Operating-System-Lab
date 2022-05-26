@@ -1,0 +1,6 @@
+page size = 10
+number of jobs = 5
+number of page frame = 12
+page frame occupied for OS = 2
+job max size = 50
+max job burst time = 10
