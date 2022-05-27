@@ -84,7 +84,6 @@ while t < max_time:
             # print('J' + str(totalJobArrived) + ' arrived')
             bank.addNewJob(newJob)
             totalJobArrived += 1
-    # same job request access ?
     bank.printBankStatement()
     bank.random_Device_Deallocation()
     print('_________________________________________________________________________________')
