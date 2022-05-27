@@ -1,0 +1,4 @@
+max time = 100
+Total number of device = 20
+number of jobs = 5
+max burst time = 10
