@@ -56,26 +56,47 @@ class Bankers:
             print("safe state ")
 
     def printBankStatement(self):
-        to_print = '\nJob No\tDevices Allocated\tMaximum Required\tRemaining Needs\n'
+        to_print = '*****************************************************************************'
+        to_print += '\nJob No\tDevices Allocated\tMaximum Required\tRemaining Needs\n'
+        to_print += '*****************************************************************************\n'
         for i in range(len(self.JobList)):
             to_print += str(i) + '\t\t\t' + str(self.JobList[i].device_allocated) + '\t\t\t\t\t' + str(self.JobList[i].maximum_required) + '\t\t\t\t\t' + str(self.JobList[i].remaining_needs) + '\n'
+        to_print += '*****************************************************************************\n'
         to_print += '\n\nTotal Device Used : ' + str(self.totalDeviceUsed)
         to_print += '\nTotal Device : ' + str(self.total_device)
         print(to_print)
         self.bankState()
 
 
-totalNumberOfDevice = 20
+"""------------------------------------------------------"""
+# Read input file and get the data
+inputFile = open("input file.txt", "r")
+input_data = inputFile.readlines()
+
+for i in input_data[0].split():
+    if i.isdigit():
+        max_time = int(i)
+
+for i in input_data[1].split():
+    if i.isdigit():
+        totalNumberOfDevice = int(i)
+
+for i in input_data[2].split():
+    if i.isdigit():
+        number_of_job = int(i)
+
+for i in input_data[3].split():
+    if i.isdigit():
+        max_burst_time = int(i) # not used
+
+"""------------------------------------------------------"""
 bank = Bankers(totalNumberOfDevice)
-max_time = 1000
-number_of_job = 5
-max_burst_time = 10
 max_device_allocated = random.randint(5, totalNumberOfDevice-5) # obviously cannot exceed the totalNumberOfDevice the bank have
 t = 0
 totalJobArrived = 0
 
 while t < max_time:
-    bank.random_Device_Allocation_Request()
+    bank.random_Device_Allocation_Request() # assume same job(or customer) will need other devices
     jobArriveBool = random.randint(0, 1)
     # continuos random jobInvoved arrive
     if jobArriveBool == 1 and totalJobArrived < number_of_job + 1:
@@ -86,6 +107,6 @@ while t < max_time:
             totalJobArrived += 1
     bank.printBankStatement()
     bank.random_Device_Deallocation()
-    print('_________________________________________________________________________________')
+    print('_________________________________________________________________________________\n')
     t += 1
 
