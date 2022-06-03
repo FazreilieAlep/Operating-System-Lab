@@ -1,0 +1,3 @@
+page capacity (frames) = 10
+number of pages = 20
+pages value range = 1 to 20
