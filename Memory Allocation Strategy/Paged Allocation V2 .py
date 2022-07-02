@@ -186,12 +186,11 @@ class Main_Memory:
             else:
                 break
 
-    def deallocateProcess(
-            self):  # update the page frame status to 'free' and add the free pageframe to the freeMemoryQue, update the jobStatus
+    def deallocateProcess(self):  # update the page frame status to 'free' and add the free pageframe to the freeMemoryQue, update the jobStatus
         for x in range(self.OSspace, self.number_of_pageFrame):
             if self.page_frame[x][5] > 0:
                 self.page_frame[x][5] -= 1  # reduce burst counter
-            elif self.page_frame[x][3] != 'free':
+            if self.page_frame[x][5] == 0 and self.page_frame[x][3] != 'free':
                 self.page_frame[x][3] = 'free'  # update page frame status
                 # self.updatePage(self.page_frame[x][1], self.page_frame[x][2], 'N')  # update page status
                 if self.job_list[self.page_frame[x][1]].processedPage == self.job_list[
@@ -307,7 +306,7 @@ while t < 100:
         memory.job_list.append(newJob)
         # addProcessToQue(self, jobID, pageID, burst_time, algoBool)
         for i in range(newJob.number_of_page):
-            memory.in_que_process_buffer.addProcessToQue(totalJobArrived, i, newJob.page[i][3], False)
+            memory.in_que_process_buffer.addProcessToQue(totalJobArrived, i, newJob.page[i][3], True)
         print('job ' + str(totalJobArrived) + ' arrived')
         totalJobArrived += 1
     memory.printInQueProcess()
